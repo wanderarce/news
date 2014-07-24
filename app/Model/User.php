@@ -15,15 +15,21 @@ class User extends AppModel {
 
     public $actsAs = array(
         'Acl' => array('type' => 'requester'),
-        'Upload.Upload' => array(
-            'photo' => array(
-                'pathMethod' => 'primaryKey',
+        'Upload.Upload' => array( 
+        'photo' => array(
                 'fields' => array(
-                    'dir' => 'photo_dir'
+                    'dir' => 'img_dir'
                 ),
-                'thumbnailMethod' => 'php'
-            )
+                'thumbnailSizes' => array(
+                    'big'   => '639x423',
+                    'small' => '130x130',
+                    'thumb' => '90x82'
+                ),
+                'thumbnailMethod' => 'php',
+                'path'            => '{ROOT}webroot{DS}files{DS}{field}{DS}',
+                'deleteOnUpdate'  => true
         )
+    )
     ); //ARO
     public $validate = array(
         'username' => array(
